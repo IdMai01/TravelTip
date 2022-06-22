@@ -1,12 +1,16 @@
 export const locService = {
     getLocs,
-    // saveCurrLoc
+    saveCurrLoc,
+    getFavorites,
+    addToFavorite,
+    setPlaceName
 }
 
+var gCurrLoc = {}
 
 var locs = [
-    { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
-    { name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
+    { name: 'Greatplace', lat: 32.047104, lng: 34.832384, createdAt: new Date },
+    { name: 'Neveragain', lat: 32.047201, lng: 34.832581, createdAt: new Date }
 ]
 
 function getLocs() {
@@ -17,19 +21,19 @@ function getLocs() {
     });
 }
 
-function UserPos() {
-    getPosition()
-        .then(pos => {
-            console.log('User position is:', pos.coords);
-            document.querySelector('.user-pos').innerText =
-                `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-        })
-        .catch(err => {
-            console.log('err!!!', err);
-        })
+window.saveCurrLoc = saveCurrLoc
+function saveCurrLoc(loc) {
+    gCurrLoc.latLng = loc
 }
 
+function getFavorites() {
+    return locs
+}
 
-// function saveCurrLoc(loc){
-//     gCurrLoc = loc
-// }
+function addToFavorite() {
+    var newFavoriteLoc = { name: gCurrLoc.name, lat: gCurrLoc.latLng.lat, lng: gCurrLoc.latLng.lng, createdAt: new Date }
+    locs.push(newFavoriteLoc)
+}
+function setPlaceName(name) {
+    gCurrLoc.name = name
+}

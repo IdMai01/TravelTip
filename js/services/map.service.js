@@ -71,9 +71,13 @@ function renderInfoWindow() {
     })
 }
 
+window.displayCurrLocation = displayCurrLocation
 
 function displayCurrLocation(location) {
+    document.querySelector('.curr-location button').style.display = 'block'
+    document.querySelector('.curr-location p').style.display = 'block'
+    document.querySelector('.curr-location input').style.display = 'block'
     document.querySelector('.user-pos').innerText =
-        `Latitude: ${location.lat} - Longitude: ${location.lng}`
-    // (location)
+        `Latitude: ${(location.lat.toFixed(5))} - Longitude: ${location.lng.toFixed(5)}`
+    saveCurrLoc(location)
 }

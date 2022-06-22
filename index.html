@@ -13,19 +13,24 @@
         <header>
             <h1 class="logo">TravelTrip</h1>
             <DIV class="search-bar">
-                <input type="text"><button class="search">GO</button><button class="my-location">my location</button>
+                <input type="text">
+                <button class="search">GO</button>
             </DIV>
         </header>
         <div class="curr-location">
             <p>You are at: <span class="user-pos"></span></p>
-            <button onclick="onSaveCurrLocation()" class="copy-location">Save Location</button>
+            <input value="" onchange="onSetPlaceName(this.value)" placeholder="My favorite place" type="text">
+            <button onclick="onAddToFavorite()" class="save-location">Save Location</button>
         </div>
         <section class="main-content">
-            <div class="Locations">
-                <p>Locations: <span class="locs"></span></p>
-                <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-                <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-                <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+            <div class="locations">
+                <table>
+                </table>
+                <div class="locations-btns">
+                    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
+                    <button onclick="onssss()" class="btn-pan">Pan Map to Tokyo</button>
+                    <button class="my-location">my location</button>
+                </div>
             </div>
             <div class="map" id="map" style="width: 100%; height: 400px;"></div>
         </section>

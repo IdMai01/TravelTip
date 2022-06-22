@@ -3,9 +3,11 @@ import { mapService } from './services/map.service.js'
 
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
+window.onAddToFavorite = onAddToFavorite;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
+window.onSetPlaceName = onSetPlaceName
 
 function onInit() {
     mapService.initMap()
@@ -13,6 +15,7 @@ function onInit() {
             console.log('Map is ready');
         })
         .catch(() => console.log('Error: cannot init map'));
+    renderFavorites()
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -52,6 +55,29 @@ function onPanTo() {
     mapService.panTo(35.6895, 139.6917);
 }
 
+function onAddToFavorite() {
+    locService.addToFavorite()
+    renderFavorites()
+}
+
+function renderFavorites() {
+    var favorites = locService.getFavorites()
+    var strHtml =
+        "<tr><th>Name</th><th>Coords</th><th>Last Updated</th></tr > "
+    for (var i = 0; i < favorites.length; i++) {
+        var currRowStr = `<tr>
+                <td>${favorites[i].name}</td>
+                <td>lat:${favorites[i].lat.toFixed(5)}
+                lng:${favorites[i].lng.toFixed(5)}</td>
+                <td>${favorites[i].createdAt.toLocaleDateString()}</td>
+            </tr>`
+        strHtml += currRowStr
+    }
+    document.querySelector('.locations table').innerHTML = strHtml
+}
+function onSetPlaceName(name) {
+    locService.setPlaceName(name)
+}
 
 
 
