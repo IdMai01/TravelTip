@@ -7,7 +7,10 @@ window.onAddToFavorite = onAddToFavorite;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
-window.onSetPlaceName = onSetPlaceName
+window.onSetPlaceName = onSetPlaceName;
+window.onDeleteFromFavorite = onDeleteFromFavorite;
+window.renderFavorites = renderFavorites;
+window.onOpenLoc = onOpenLoc
 
 function onInit() {
     mapService.initMap()
@@ -65,12 +68,15 @@ function renderFavorites() {
     var strHtml =
         "<tr><th>Name</th><th>Coords</th><th>Last Updated</th></tr > "
     for (var i = 0; i < favorites.length; i++) {
+        var currLoc = favorites[i]
         var currRowStr = `<tr>
-                <td>${favorites[i].name}</td>
-                <td>lat:${favorites[i].lat.toFixed(5)}
-                lng:${favorites[i].lng.toFixed(5)}</td>
-                <td>${favorites[i].createdAt.toLocaleDateString()}</td>
-            </tr>`
+                <td>${currLoc.name}</td>
+                <td>lat:${currLoc.lat.toFixed(5)}
+                lng:${currLoc.lng.toFixed(5)}</td>
+                <td>${currLoc.createdAt.toLocaleDateString()}</td>
+                <td class="table-btns"><button onclick="onDeleteFromFavorite(${currLoc.idx})">X</button><button onclick="onOpenLoc(${currLoc.idx})">Go</button></td>
+                </td>
+                </tr>`
         strHtml += currRowStr
     }
     document.querySelector('.locations table').innerHTML = strHtml
@@ -78,6 +84,10 @@ function renderFavorites() {
 function onSetPlaceName(name) {
     locService.setPlaceName(name)
 }
-
-
+function onDeleteFromFavorite(idx) {
+    locService.deleteFromFavorite(idx)
+}
+function onOpenLoc(idx) {
+    mapService.panTo(...locService.getCoordsByIdx(idx))
+}
 

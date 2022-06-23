@@ -3,7 +3,8 @@ export const mapService = {
     initMap,
     // addMarker,
     panTo,
-    displayCurrLocation
+    displayCurrLocation,
+    openLoc
 }
 
 var gMap
@@ -80,4 +81,7 @@ function displayCurrLocation(location) {
     document.querySelector('.user-pos').innerText =
         `Latitude: ${(location.lat.toFixed(5))} - Longitude: ${location.lng.toFixed(5)}`
     saveCurrLoc(location)
+}
+function openLoc(idx){
+
 }

@@ -20,9 +20,10 @@ body {
     display: none;
     margin: 0 5px;
 }
-.curr-location input{
+
+.curr-location input {
     display: none;
-    border:1px solid #21232c;
+    border: 1px solid #21232c;
     width: 20vh;
 }
 
@@ -93,11 +94,6 @@ header {
     grid-template-rows: 1fr 1fr;
 }
 
-.locations button {
-    width: min-content;
-}
-
-
 .locations table {
     align-self: center;
     justify-self: center;
@@ -127,6 +123,21 @@ th {
 
 tr {
     font-size: 0.6rem;
+}
+
+.table-btns {
+    width: fit-content;
+    border: 0px solid beige;
+}
+
+.table-btns button {
+    border: 1px solid #21232c;
+    font-size: 0.7rem;
+    margin-bottom: 3px;
+}
+
+.table-btns button:first-of-type:hover {
+    background-color: red;
 }
 
 .map {
